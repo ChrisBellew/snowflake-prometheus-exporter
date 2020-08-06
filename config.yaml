@@ -1,0 +1,7 @@
+default_fetch_interval: 10
+metrics:
+  - name: test_metric
+    help: A test metric
+    statement:
+      - USE ROLE ACCOUNTADMIN
+      - SELECT COUNT(*) FROM snowfake.public.snowtable
