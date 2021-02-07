@@ -29,7 +29,7 @@ helm upgrade \
   snowflake-prometheus-exporter
 ```
 
-## Developing
+## Contributing
 
 Set up a kind cluster for local development
 
