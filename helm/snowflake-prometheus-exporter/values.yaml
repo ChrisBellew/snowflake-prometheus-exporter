@@ -1,0 +1,55 @@
+replicaCount: 1
+
+snowflake:
+  # account: <account>.<region>
+  # username: <username>
+  # password: <password>
+  config:
+    default_fetch_interval: 60
+    metrics:
+      - name: test_metric
+        help: A test metric
+        statement:
+          - "SELECT COUNT(*) FROM snowflake_sample_data.weather.daily_14_total"
+
+image:
+  repository: localhost:5000/snowflake-prometheus-exporter
+  pullPolicy: Always
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+
+securityContext:
+  runAsUser: 65534
+  runAsNonRoot: true
+  runAsGroup: 65534
+
+#securityContext: {}
+# capabilities:
+#   drop:
+#   - ALL
+# readOnlyRootFilesystem: true
+# runAsNonRoot: true
+# runAsUser: 1000
+
+resources: {}
+
+autoscaling:
+  enabled: false
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
