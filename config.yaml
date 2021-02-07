@@ -3,5 +3,4 @@ metrics:
   - name: test_metric
     help: A test metric
     statement:
-      - USE ROLE ACCOUNTADMIN
-      - SELECT COUNT(*) FROM snowfake.public.snowtable
+      - SELECT COUNT(*) FROM snowflake_sample_data.weather.daily_14_total
