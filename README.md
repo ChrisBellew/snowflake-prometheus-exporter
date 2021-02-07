@@ -4,13 +4,10 @@ A Prometheus exporter for Snowflake
 
 ## Usage
 
-The default way to use this exporter is by installing it into kubernetes with helm. You will need to set up your Snowflake connection details inside `values.yaml` like so:
+The default way to use this exporter is by installing it into kubernetes with helm. You will need to set up your Snowflake fetch configs inside `values.yaml` like so:
 
 ```yaml
 snowflake:
-  account: <account>.<region>
-  username: <username>
-  password: <password>
   config:
     default_fetch_interval: 10
     metrics:
@@ -18,6 +15,18 @@ snowflake:
         help: A test metric
         statement:
           - "SELECT COUNT(*) FROM snowflake_sample_data.weather.daily_14_total" # snowflake_sample_data.weather.daily_14_total is available in all Snowflake accounts and can be accessed using the `public` role
+```
+
+And provide the connection details as helm values:
+
+```
+helm upgrade \
+  --install \
+  snowflake-prometheus-exporter \
+  --set snowflake.account=$SNOWFLAKE_ACCOUNT \
+  --set snowflake.username=$SNOWFLAKE_USERNAME \
+  --set snowflake.password=$SNOWFLAKE_PASSWORD \
+  snowflake-prometheus-exporter
 ```
 
 ## Developing
