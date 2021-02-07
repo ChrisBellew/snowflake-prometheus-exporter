@@ -17,6 +17,10 @@ const app = express()
 const port = 3000
 const prometheus = require('prom-client');
 
+app.get('/healthz', (_, res) => {
+  return res.sendStatus(200);
+});
+
 app.get('/metrics', (req, res) => {
   return res.send(prometheus.register.metrics());
 });
