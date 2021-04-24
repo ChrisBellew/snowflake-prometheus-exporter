@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  snowflake-prometheus-exporter:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2021-04-24T10:17:38.646839491+08:00"
+    description: A Helm chart for Kubernetes
+    digest: 9b12617659b8880a2f3598bee14ecb9597e75e234e732807d0a20480d9a1894b
+    name: snowflake-prometheus-exporter
+    type: application
+    urls:
+    - snowflake-prometheus-exporter-1.0.0.tgz
+    version: 1.0.0
+generated: "2021-04-24T10:17:38.645989093+08:00"

@@ -1,3 +1,11 @@
+# To install kind on linux:
+# curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.10.0/kind-linux-amd64
+# chmod +x ./kind
+# sudo mv ./kind /usr/local/bin/kind
+
+# To install kubectl on linux:
+# sudo snap install kubectl --classic
+
 #!/bin/sh
 set -o errexit
 

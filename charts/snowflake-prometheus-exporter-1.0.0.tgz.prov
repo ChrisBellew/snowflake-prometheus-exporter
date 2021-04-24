@@ -1,0 +1,26 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+apiVersion: v2
+appVersion: 1.0.0
+description: A Helm chart for Kubernetes
+name: snowflake-prometheus-exporter
+type: application
+version: 1.0.0
+
+...
+files:
+  snowflake-prometheus-exporter-1.0.0.tgz: sha256:cd8c6c1f76e233c0430d27a48ffc4c6353226cb6f55a2e81df3abc510dbeb265
+-----BEGIN PGP SIGNATURE-----
+
+wsDcBAEBCgAQBQJgg4ZFCRAItIE6E0iW+wAAJ4UMAMgRw+jM86xrT2BMYlXmbEpV
+iQR6FzL7xA099pZQLG7AJ5KTSis7DvlusM+WPr/86kjCsQqcmh3JijwwxnM9MXX1
+5WV0WlpNcYh7C4b6XaOacS26YYDv4/0tBrp3U8OqJsvW3HdiWDixl+3tF4IGIuK9
+GFowcwGYt0JNWmajSY5htlwnIrnPW249DM1vtUivpwg/7E3KR1wYAJgBEAp3wiGf
+S2Zgu69yIkZHeF78IfYfh5V75/PbRIpXoCyB0m1Pv7Gi5c57FJraytALhqeeMrVV
+FynVrRtzcmbT9grfFszW9wiV5YbKAqemHCPbWSlRiIaUnusi2pYcF4FmKNkZebQF
+/1opiSxFOCNm5rH7coQqvgA4akEXTQfiDnPTGoT1EXSdvSrPhM7CdXL5ZyX7Vo7P
+FdxxLgKSalhyy+nl5L+MZ4lAXFRMJElnT/pjyyI3+Ta76JIPr9OIzozTGyS5EUmA
+qd4A/8e5FPqQXOR1rBqJphGdrTtRjxpSDZ2cCoLIpw==
+=Mtt5
+-----END PGP SIGNATURE-----
