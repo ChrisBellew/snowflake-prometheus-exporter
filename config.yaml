@@ -1,0 +1,5 @@
+default_fetch_interval: 60
+metrics:
+  - name: test_metric
+    help: A test metric
+    statement: SELECT COUNT(*) FROM snowflake_sample_data.weather.daily_14_total

@@ -1,16 +1,12 @@
 replicaCount: 1
 
 snowflake:
-  # account: <account>.<region>
-  # username: <username>
-  # password: <password>
   config:
     default_fetch_interval: 600
     metrics:
       - name: test_metric
         help: A test metric
-        statement:
-          - "SELECT COUNT(*) FROM snowflake_sample_data.weather.daily_14_total"
+        statement: SELECT COUNT(*) FROM snowflake_sample_data.weather.daily_14_total
 
 image:
   repository: cbellew/snowflake-prometheus-exporter
