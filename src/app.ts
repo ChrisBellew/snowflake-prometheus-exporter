@@ -2,6 +2,9 @@ import express from 'express'
 import YAML from 'yaml'
 import { snowflakeService } from './snowflake/service';
 import fs from 'fs'
+import { parseMetrics } from './config';
+
+console.log('Starting Snowflake prometheus exporter...');
 
 const { SNOWFLAKE_ACCOUNT, SNOWFLAKE_USERNAME, SNOWFLAKE_PASSWORD, CONFIG_YAML_PATH } = process.env;
 
@@ -9,9 +12,10 @@ if (!SNOWFLAKE_ACCOUNT) throw new Error('Missing environment variable SNOWFLAKE_
 if (!SNOWFLAKE_USERNAME) throw new Error('Missing environment variable SNOWFLAKE_USERNAME');
 if (!SNOWFLAKE_PASSWORD) throw new Error('Missing environment variable SNOWFLAKE_PASSWORD');
 if (!CONFIG_YAML_PATH) throw new Error('Missing environment variable CONFIG_YAML_PATH');
+if (!fs.existsSync(CONFIG_YAML_PATH)) throw new Error(`No config file found at ${CONFIG_YAML_PATH}`);
+if (!fs.existsSync(CONFIG_YAML_PATH)) throw new Error(`No config file found at ${CONFIG_YAML_PATH}`);
 
-const config: Config = YAML.parse(fs.readFileSync(CONFIG_YAML_PATH).toString());
-const { metrics } = config;
+const metrics = parseMetrics(YAML.parse(fs.readFileSync(CONFIG_YAML_PATH).toString()));
 
 const app = express()
 const port = 3000
@@ -31,10 +35,8 @@ app.get('/metrics', (req, res) => {
   app.listen(port, () => { console.log(`Snowflake exporter listening at http://localhost:${port}`) });
 
   const metricPromises = metrics.map(async metric => {
-    const { name, statement, fetch_interval, help } = metric;
-    const fetchInterval = fetch_interval || config.default_fetch_interval || 300;
+    const { name, statements, fetchInterval, help } = metric;
     const gauge = new prometheus.Gauge({ name, help });
-    const statements = Array.isArray(statement) ? statement : [statement];
 
     while (true) {
       const rows = await service.query(statements);
@@ -49,15 +51,3 @@ app.get('/metrics', (req, res) => {
 
   await Promise.all(metricPromises);
 })();
-
-interface Config {
-  default_fetch_interval: number
-  metrics: Metric[]
-}
-
-interface Metric {
-  name: string
-  statement: string | string[]
-  fetch_interval: number | undefined
-  help: string | undefined
-}
