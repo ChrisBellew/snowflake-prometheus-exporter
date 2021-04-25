@@ -13,8 +13,7 @@ default_fetch_interval: 60
 metrics:
   - name: test_metric
     help: A test metric
-    statement:
-      - "SELECT COUNT(*) FROM snowflake_sample_data.weather.daily_14_total"
+    statement: SELECT COUNT(*) FROM snowflake_sample_data.weather.daily_14_total
 ```
 
 ## Snowflake Connection parameters
@@ -31,8 +30,7 @@ In addition to the `config.yaml` you will need three Snowflake connection parame
 This exporter is deployed as a container. Here's some guides to help you install with your preferred container workflow.
 
 - [Install with Docker](#install-with-docker)
-- [Install into Kubernetes with kubectl](#install-with-docker)
-- [Install into Kubernetes with helm](#install-with-docker)
+- [Install into Kubernetes with helm](#install-into-kubernetes-with-helm)
 
 ## Install with Docker
 
@@ -77,33 +75,26 @@ docker run -d \
   --mount type=bind,source="$(pwd)/config.yaml",target=/mount/config.yaml,readonly \
   cbellew/snowflake-prometheus-exporter:latest
 ```
-## Usage
 
-The default way to use this exporter is by installing it into kubernetes with helm. You will need to set up your Snowflake fetch configs inside `values.yaml` like so:
+## Install into Kubernetes with helm
 
-```yaml
-snowflake:
-  config:
-    default_fetch_interval: 10
-    metrics:
-      - name: test_metric
-        help: A test metric
-        statement:
-          - "SELECT COUNT(*) FROM snowflake_sample_data.weather.daily_14_total" # snowflake_sample_data.weather.daily_14_total is available in all Snowflake accounts and can be accessed using the `public` role
+The Snowflake prometheus export has a self-hosted helm chart repo. First, add that to your local repos list.
+```
+helm repo add snowflake-prometheus-exporter https://snowflake-prometheus-exporter.s3.amazonaws.com
+helm repo update
 ```
 
-And provide the connection details as helm values:
+You can now install the latest chart
 
 ```
 helm upgrade \
   --install \
   snowflake-prometheus-exporter \
-  --set snowflake.account=$SNOWFLAKE_ACCOUNT \
-  --set snowflake.username=$SNOWFLAKE_USERNAME \
-  --set snowflake.password=$SNOWFLAKE_PASSWORD \
-  https://snowflake-prometheus-exporter.s3.amazonaws.com/snowflake-prometheus-exporter-1.0.0.tgz
+  --set snowflake.account=ab12345.us-east-1 \
+  --set snowflake.username=myusername \
+  --set snowflake.password=mypassword \
+  snowflake-prometheus-exporter/snowflake-prometheus-exporter
 ```
-
 
 Check the pod is running
 ```
