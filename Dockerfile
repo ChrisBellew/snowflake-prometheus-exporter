@@ -1,7 +1,10 @@
 FROM node:alpine
 
-WORKDIR /home
-COPY . .
+RUN adduser snowflakeexporter -D
+USER snowflakeexporter
+
+WORKDIR /home/snowflakeexporter
+COPY --chown=snowflakeexporter . .
 RUN npm i
 RUN npm run build
 
