@@ -18,7 +18,7 @@ export interface Metric {
   help: string | undefined;
 }
 
-const DEFAULT_FETCH_INTERVAL_SECONDS = 600; // 10 minutes
+const DEFAULT_FETCH_INTERVAL_SECONDS = 43200; // 43200 s = 12 hrs
 
 export const parseMetrics = (config: RawConfig): Metric[] => {
   const { default_fetch_interval_seconds, metrics } = config;
